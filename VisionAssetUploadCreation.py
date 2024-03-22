@@ -1,17 +1,18 @@
-#Things you need to do before running the script, run the following commands to download additional libraries
-#py -m pip install pandas
-#py -m pip install openpyxl
+"""
+Things you need to do before running the script, run the following commands to download additional libraries
+py -m pip install pandas
+py -m pip install openpyxl
 
-#Initial version of the file will copy a specified file name in the script location and save the file into that same location. this can then be copied over to the desired Asset upload location.
-#Pandas library is used to make copying columns and modifying columns easy.
-#Read up on Tkinter for a more friendly UI input instead of through commandline
-##################################################################################
-#Things to add
-#File name creation to follow naming convention of Meter Manufacturer-Customer-PO #-Batch #-meter count
-#Files read from variable location based on Customer
-#Files saved to variable location based on Customer
-################################################################################
+Initial version of the file will copy a specified file name in the 
+    script location and save the file into that same location. 
+This can then be copied over to the desired Asset upload location.
+Pandas library is used to make copying columns and modifying columns easy.
+Read up on Tkinter for a more friendly UI input instead of through commandline
 
+Things to add:
+Should be complete
+
+"""
 
 import os
 import datetime as dt
@@ -66,7 +67,7 @@ def main():
     #Set Script & File Paths
     fileName='PresqueIsle_PT223081-PO-RMA 15325-Swap_20240313.xlsx'
     scriptPath = os.path.dirname(__file__)
-    scriptPathMMF = fr'\\devfs\e2e\Docs\AMIot\Asset_Upload\Asset_Files\{customer}\MMF\Lora Electric Meters\Pending files'
+    #scriptPathMMF = fr'\\devfs\e2e\Docs\AMIot\Asset_Upload\Asset_Files\{customer}\MMF\Lora Electric Meters\Pending files'
     scriptPathUpload = fr'\\devfs\e2e\Docs\AMIot\Asset_Upload\Asset_Files\{customer}\Upload\Electric'
     filePath1 = os.path.join(scriptPath,fileName)
 
@@ -138,7 +139,41 @@ def main():
     file1['Meter_FW']= customer+'-'+file1['Meter_FW']+'-'+file1['Modem_FW']
 
     #Reorder columns    
-    cols = ['Meter_ID','Manufacturer_SN','Meter_Model','Meter_Model_Revision','Meter_FW','Meter_Form','Meter_Class','MeterConfigurationType','MeterCommissionStatus','MeterCommissionStatusDetail','Meter_TimeSetting','Meter_TimeSetting_Verified','Modem_Manufacturer','Modem_ID','Modem_SN','Modem_Model','Modem_Model_Revision','Modem_FW','ModemConfigurationType','LoRa_DevEUI','LoRa_JoinEUI','LoRa_AppKey','LoRa_NetworkKey','ModemCommissionStatus','ModemCommissionStatusDetail','ModemDeviceType','Meter_ServiceType','Modem_ServiceType','PO_Number','AssetPallet','AssetLotNumber','AssetPurchasePrice','ShipmentDate','AssetBatch','AssetBox']
+    cols = ['Meter_ID',
+            'Manufacturer_SN',
+            'Meter_Model',
+            'Meter_Model_Revision',
+            'Meter_FW',
+            'Meter_Form',
+            'Meter_Class',
+            'MeterConfigurationType',
+            'MeterCommissionStatus',
+            'MeterCommissionStatusDetail',
+            'Meter_TimeSetting',
+            'Meter_TimeSetting_Verified',
+            'Modem_Manufacturer',
+            'Modem_ID',
+            'Modem_SN',
+            'Modem_Model',
+            'Modem_Model_Revision',
+            'Modem_FW',
+            'ModemConfigurationType',
+            'LoRa_DevEUI',
+            'LoRa_JoinEUI',
+            'LoRa_AppKey',
+            'LoRa_NetworkKey',
+            'ModemCommissionStatus',
+            'ModemCommissionStatusDetail',
+            'ModemDeviceType',
+            'Meter_ServiceType',
+            'Modem_ServiceType',
+            'PO_Number',
+            'AssetPallet',
+            'AssetLotNumber',
+            'AssetPurchasePrice',
+            'ShipmentDate',
+            'AssetBatch',
+            'AssetBox']
     file1 = file1[cols]
 
     #Export as a new file
